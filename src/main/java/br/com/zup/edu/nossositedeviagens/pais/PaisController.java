@@ -25,7 +25,6 @@ public class PaisController {
     @PostMapping
     public ResponseEntity<PaisResponse> criar(@RequestBody @Valid PaisRequest paisRequest, UriComponentsBuilder uriBuilder){
 
-
         Pais pais = paisRequest.toModel();
         paisRepository.save(pais);
         URI uri = uriBuilder.path("/v1/paises/{id}").buildAndExpand(pais.getId()).toUri();
