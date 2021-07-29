@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 
 @RestController
-@RequestMapping("/paises")
+@RequestMapping("/v1/paises")
 public class PaisController {
 
     private final PaisRepository paisRepository;
@@ -21,12 +23,13 @@ public class PaisController {
     }
 
     @PostMapping
-    public ResponseEntity<?> criar(@RequestBody @Valid PaisRequest paisRequest){
+    public ResponseEntity<PaisResponse> criar(@RequestBody @Valid PaisRequest paisRequest, UriComponentsBuilder uriBuilder){
+
 
         Pais pais = paisRequest.toModel();
         paisRepository.save(pais);
-
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        URI uri = uriBuilder.path("/v1/paises/{id}").buildAndExpand(pais.getId()).toUri();
+        return ResponseEntity.created(uri).body(new PaisResponse(pais));
     }
 
 }
