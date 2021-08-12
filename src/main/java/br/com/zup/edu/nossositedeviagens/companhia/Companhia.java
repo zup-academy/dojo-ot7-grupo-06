@@ -26,11 +26,15 @@ public class Companhia {
     private Pais pais;
 
     @Deprecated
-    private Companhia() {
+    public Companhia() {
     }
 
     public Companhia(String nome, Pais pais) {
         this.nome = nome;
         this.pais = pais;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

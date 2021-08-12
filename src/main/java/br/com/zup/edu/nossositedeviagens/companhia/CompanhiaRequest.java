@@ -22,7 +22,6 @@ public class CompanhiaRequest {
 
 
     public Companhia toModel(PaisRepository paisRepository) {
-
         Pais pais = paisRepository.findById(idPais).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
