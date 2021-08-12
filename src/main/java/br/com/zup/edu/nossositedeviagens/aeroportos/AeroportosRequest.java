@@ -1,4 +1,4 @@
-package br.com.zup.edu.nossositedeviagens.companhia;
+package br.com.zup.edu.nossositedeviagens.aeroportos;
 
 import br.com.zup.edu.nossositedeviagens.compartilhado.validators.ExistsById;
 import br.com.zup.edu.nossositedeviagens.compartilhado.validators.UniqueValue;
@@ -10,14 +10,12 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-public class CompanhiaRequest {
+public class AeroportosRequest {
 
-    @NotBlank
-    @UniqueValue(domainClass = Companhia.class, fieldName = "nome")
+    @NotBlank @UniqueValue(domainClass = Aeroporto.class, fieldName = "id")
     private String nome;
 
-    @NotNull
-    @ExistsById(fieldName = "id", domainClass = Pais.class)
+    @NotNull @ExistsById(domainClass = Pais.class, fieldName = "id")
     private Long idPais;
 
     public String getNome() {
@@ -28,12 +26,9 @@ public class CompanhiaRequest {
         return idPais;
     }
 
-    public Companhia toModel(PaisRepository paisRepository) {
-        Pais pais = paisRepository.findById(idPais).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    public Aeroporto toModel(PaisRepository paisRepository) {
+        Pais pais = paisRepository.findById(this.idPais).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        return new Companhia(nome, pais);
+        return new Aeroporto(this.nome, pais);
     }
-
-
 }
