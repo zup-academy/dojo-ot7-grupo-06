@@ -1,6 +1,6 @@
 package br.com.zup.edu.nossositedeviagens.companhia;
 
-import br.com.zup.edu.nossositedeviagens.pais.PaisRequest;
+import br.com.zup.edu.nossositedeviagens.pais.PaisRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +13,16 @@ import javax.validation.Valid;
 @RequestMapping("/v1/companhia")
 public class CompanhiaController {
 
+
+    private final PaisRepository paisRepository;
+
+    public CompanhiaController(PaisRepository paisRepository) {
+        this.paisRepository = paisRepository;
+    }
+
     public ResponseEntity<?> criar(@RequestBody @Valid CompanhiaRequest companhiaRequest, UriComponentsBuilder uriBuilder){
 
-
+        Companhia companhia = companhiaRequest.toModel(paisRepository);
 
     }
 }
