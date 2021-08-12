@@ -18,15 +18,11 @@ public class CompanhiaController {
 
     private final PaisRepository paisRepository;
 
-    private CompanhiaRepository companhiaRepository;
+    private final CompanhiaRepository companhiaRepository;
 
     public CompanhiaController(PaisRepository paisRepository, CompanhiaRepository companhiaRepository) {
         this.paisRepository = paisRepository;
         this.companhiaRepository = companhiaRepository;
-    }
-
-    public CompanhiaController(PaisRepository paisRepository) {
-        this.paisRepository = paisRepository;
     }
 
     @PostMapping

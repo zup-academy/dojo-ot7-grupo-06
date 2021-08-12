@@ -9,4 +9,13 @@ public class PaisResponse {
         this.id = pais.getId();
         this.nome = pais.getNome();
     }
+
+    public Long getId() {
+        return id;
+    }
+
+
+    public String getNome() {
+        return nome;
+    }
 }

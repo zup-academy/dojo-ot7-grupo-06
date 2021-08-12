@@ -1,15 +1,14 @@
 package br.com.zup.edu.nossositedeviagens.companhia;
 
-import br.com.zup.edu.nossositedeviagens.compartilhado.UniqueValue;
+import br.com.zup.edu.nossositedeviagens.compartilhado.validators.ExistsById;
+import br.com.zup.edu.nossositedeviagens.compartilhado.validators.UniqueValue;
 import br.com.zup.edu.nossositedeviagens.pais.Pais;
 import br.com.zup.edu.nossositedeviagens.pais.PaisRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.persistence.EntityManager;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Optional;
 
 public class CompanhiaRequest {
 
@@ -18,6 +17,7 @@ public class CompanhiaRequest {
     private String nome;
 
     @NotNull
+    @ExistsById(fieldName = "id", domainClass = Pais.class)
     private Long idPais;
 
 
